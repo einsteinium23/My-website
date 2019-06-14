@@ -4,10 +4,15 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" href="admin.php">Login</a>
+</li>
+
+<?php if(isset($_SESSION['loggedin'])) { ?>
+
+  <li class="nav-item">
+    <a class="nav-link" href="../usersubmit.php">Post Submission</a>
   </li>
-<? if(isset($_SESSION['loggedin']))?>
   <li class="nav-item">
     <a class="nav-link" href="../logout.php">Logout</a>
   </li>
-
+<?php } ?>
 </ul>

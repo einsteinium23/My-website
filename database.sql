@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='admin login usernames and passwords';
 
--- Dumping data for table survivtips.admin: ~3 rows (approximately)
+-- Dumping data for table survivtips.admin: ~2 rows (approximately)
 DELETE FROM `admin`;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` (`id`, `created_at`, `updated_at`, `username`, `password`, `type`, `email`) VALUES
@@ -89,6 +89,28 @@ CREATE TABLE IF NOT EXISTS `users` (
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+-- Dumping structure for table survivtips.usersubmissions
+CREATE TABLE IF NOT EXISTS `usersubmissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `description` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `imgurl` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `vidurl` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `userid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_usersubmissions_admin` (`userid`),
+  CONSTRAINT `FK_usersubmissions_admin` FOREIGN KEY (`userid`) REFERENCES `admin` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table survivtips.usersubmissions: ~0 rows (approximately)
+DELETE FROM `usersubmissions`;
+/*!40000 ALTER TABLE `usersubmissions` DISABLE KEYS */;
+INSERT INTO `usersubmissions` (`id`, `created_at`, `updated_at`, `description`, `title`, `imgurl`, `vidurl`, `userid`) VALUES
+	(8, '2019-06-14 14:51:13', '2019-06-14 14:51:13', 'dasgrwageasgh', 'test', 'aew4ayhg', 'WEYGW', 1);
+/*!40000 ALTER TABLE `usersubmissions` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

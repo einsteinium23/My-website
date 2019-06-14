@@ -1,11 +1,4 @@
 Things to do:
-
-Make tips and tricks page
-
-Make submit tips and submit clips for users
-
-Make mail list for weekly tips- allow users to add their email and change/delete
-
 update changelog to include all updates
 
 

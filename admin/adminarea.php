@@ -1,5 +1,7 @@
 <?php
 include "../conn.php";
+include 'adminsession.php';
+
 if (isset($_POST['SubmitChange'])) {
   $title = ($_POST['Title']);
 $Changelog = ($_POST['Changelog']);
@@ -8,6 +10,20 @@ $date = $_POST['date'];
 $sql = "INSERT INTO changelog (title, changelog, `date`) VALUES ('$title', '$Changelog', '$date')";
 $connection->exec($sql);
 }
+
+//get all data from users
+$sql = "SELECT* FROM `admin` ORDER BY email DESC";
+$statement = $connection->prepare($sql);
+
+$statement->execute();
+$emails=$statement->fetchALL();
+
+//get all data from users
+$sql = "SELECT* FROM usersubmissions";
+$statement = $connection->prepare($sql);
+$statement->execute();
+$submissions=$statement->fetchALL();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +37,7 @@ $connection->exec($sql);
 <body>
     <div class="container">
     <?php include 'navadmin.php'; ?>
-    <?php include 'adminsession.php'; ?>
+
 <div class="container">
 <div class="row">
 <div class="col">
@@ -43,13 +59,43 @@ $connection->exec($sql);
     </div>
 
 </div>
+<div class="row">
+    <div class="col">
+    <?php
+if ($emails && $statement->rowCount() > 0) { ?>
+<p><?php
+   foreach ($emails as $c ) { ?>
+    <?php echo $c['email'];?>,
+ 
 
+
+<?php
+   }
+  ?>
+  </p>
+  <?php
+  }
+  ?>
+    </div>
+</div>
+</div>
+<?php
+if ($submissions && $statement->rowCount() > 0) { ?>
+<p><?php
+   foreach ($submissions as $c ) { ?>
+   <pre><?php echo $c['title'];?>
+    <?php echo $c['description'];?>,
+    <?php echo $c['imgurl'];?>,
+    <?php echo $c['vidurl'];?>,
+</pre>    
+<?php
+   }
+  ?>
+  </p>
+  <?php
+  }
+  ?>
 
 </div>
-
-
-</div>
-
-
 </body>
 </html>

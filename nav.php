@@ -11,10 +11,25 @@
   <li class="nav-item">
     <a class="nav-link" href="./admin/register.php">Create an Account</a>
   </li>
-<?php if(isset($_SESSION['loggedin'])) {?>
+  <?php if(isset($_SESSION['loggedin'])) { ?>
+
+<li class="nav-item">
+  <a class="nav-link" href="usersubmit.php">Post Submission</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="logout.php">Logout</a>
+</li>
+<?php } ?>
+
+<?php if(isset($_SESSION['loggedin'])) { 
+  if ($_SESSION['type'] == 'admin') { ?>
+
   <li class="nav-item">
-    <a class="nav-link" href="logout.php">Logout</a>
-  </li>
-  <?php 
-} ?>
+  <a class="nav-link" href="./admin/adminarea.php">Admin Area</a>
+</li>
+<?php } ?>
+
+
+
+<?php } ?>
 </ul>
